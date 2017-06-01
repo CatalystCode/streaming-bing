@@ -2,7 +2,7 @@
 [![Travis CI status](https://api.travis-ci.org/CatalystCode/streaming-instagram.svg?branch=master)](https://travis-ci.org/CatalystCode/streaming-instagram)
 
 A library for reading public web news results from [Bing Custom Search](https://customsearch.ai/) using Spark Streaming.
-![bing-custom-search](https://cloud.githubusercontent.com/assets/7635865/26688238/b6b3fef0-46b7-11e7-843c-fbbd528545c9.png)
+![bing-custom-search](https://cloud.githubusercontent.com/assets/7635865/26688550/8f6f2800-46b8-11e7-907f-8aba0691647e.png)
 
 ## Usage example ##
 
