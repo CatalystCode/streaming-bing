@@ -21,7 +21,7 @@ private class BingReceiver(
     client
       .loadNewPostings
       .filter(x => {
-        logDebug(s"Got Bing result ${x.name} from time ${x.dateLastCrawled}")
+        logDebug(s"Received Bing result ${x.name} from time ${x.dateLastCrawled}")
         isNew(x)
       })
       .foreach(x => {
@@ -55,7 +55,7 @@ class BingInputDStream(
 ) extends ReceiverInputDStream[BingPost](ssc) {
 
   override def getReceiver(): Receiver[BingPost] = {
-    logDebug("Creating facebook receiver")
+    logDebug("Creating bing receiver")
     new BingReceiver(client, pollingSchedule, storageLevel, pollingWorkers)
   }
 }
