@@ -80,4 +80,11 @@ class BingClientSpec extends FlatSpec {
 
     assert(response === List())
   }
+
+  it should "encode keywords" in {
+    assert(BingClient.encodeKeyword("foobar") == "foobar")
+    assert(BingClient.encodeKeyword("foo bar") == "foo%20bar")
+    assert(BingClient.encodeKeyword("(foobar)") == "%28foobar%29")
+    assert(BingClient.encodeKeyword("foo|bar") == "foo%7cbar")
+  }
 }

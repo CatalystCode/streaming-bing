@@ -61,6 +61,10 @@ extends Serializable with Logger {
 
 object BingClient {
   def encodeKeyword(keyword: String): String = {
-    keyword.replace(" ", "%20")
+    keyword
+      .replace(" ", "%20")
+      .replace("|", "%7c")
+      .replace("(", "%28")
+      .replace(")", "%29")
   }
 }
