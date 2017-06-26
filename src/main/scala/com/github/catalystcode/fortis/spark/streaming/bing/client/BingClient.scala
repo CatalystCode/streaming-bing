@@ -60,9 +60,7 @@ extends Serializable with Logger {
 }
 
 object BingClient {
-  final val URL_ENCODE_SPACE = "%20"
-
   def encodeKeyword(keyword: String): String = {
-    keyword.replace(" ", URL_ENCODE_SPACE)
+    keyword.replace(" ", "%20")
   }
 }
