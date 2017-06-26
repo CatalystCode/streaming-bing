@@ -1,5 +1,6 @@
 package com.github.catalystcode.fortis.spark.streaming.bing.client
 
+import com.github.catalystcode.fortis.spark.streaming.bing.client.BingClient.encodeKeyword
 import com.github.catalystcode.fortis.spark.streaming.bing.dto.{BingPost, BingResponse, BingWebPage}
 import com.github.catalystcode.fortis.spark.streaming.bing.{BingAuth, Logger}
 import net.liftweb.json
@@ -12,7 +13,6 @@ extends Serializable with Logger {
   //Bing has a max result set count of 20 records at the moment
   final val MAX_RECORD_COUNT = 20
   final val BING_RATE_LIMIT_THROTTLE_RATE = 1000
-  final val URL_ENCODE_SPACE = "%20"
   final val BING_QL_TERM_OR_SEPARATOR = ")||("
 
   def loadNewPostings(): Iterable[BingPost] = {
@@ -41,7 +41,7 @@ extends Serializable with Logger {
   private def loadBingPostings(keywords: Seq[String], offset: Int = 0, url: Option[String] = None): Iterable[BingPost] = {
     keywords match {
       case Nil => List()
-      case k :: ks => parseResponse(fetchBingResponse(s"(${keywords.map(_.replace(" ", URL_ENCODE_SPACE)).mkString(BING_QL_TERM_OR_SEPARATOR)})", offset, url)) match {
+      case k :: ks => parseResponse(fetchBingResponse(s"(${keywords.map(encodeKeyword).mkString(BING_QL_TERM_OR_SEPARATOR)})", offset, url)) match {
         case None => List()
         case Some(response) => var payload = response.value
           logInfo(s"Got json response with ${response.value.length} entries")
@@ -57,4 +57,12 @@ extends Serializable with Logger {
   }
 
   protected def fetchBingResponse(query: String, offset: Int = 0, url: Option[String] = None): String
+}
+
+object BingClient {
+  final val URL_ENCODE_SPACE = "%20"
+
+  def encodeKeyword(keyword: String): String = {
+    keyword.replace(" ", URL_ENCODE_SPACE)
+  }
 }
