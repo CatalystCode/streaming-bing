@@ -1,7 +1,5 @@
 package com.github.catalystcode.fortis.spark.streaming.bing.client
 
-import java.io.{IOError, IOException}
-
 import com.github.catalystcode.fortis.spark.streaming.bing.dto.{BingPost, BingResponse, BingWebPage}
 import com.github.catalystcode.fortis.spark.streaming.bing.{BingAuth, Logger}
 import net.liftweb.json
